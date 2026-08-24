@@ -1,0 +1,2675 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Лола Давлатова — Портфолио</title>
+
+<style>
+
+/* =========================================================
+   ОСНОВНЫЕ ПЕРЕМЕННЫЕ
+========================================================= */
+
+:root {
+    --bg-1: #08090f;
+    --bg-2: #111525;
+    --bg-3: #17152a;
+
+    --text: #f5f4fa;
+    --text-soft: #aaaabd;
+
+    --glass: rgba(255, 255, 255, 0.075);
+    --glass-border: rgba(255, 255, 255, 0.13);
+
+    --accent: #c8a8ff;
+    --accent-2: #7dd9ff;
+
+    --menu-bg: rgba(18, 20, 31, 0.90);
+
+    --shadow:
+        0 30px 80px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+body.light {
+    --bg-1: #eeeaf7;
+    --bg-2: #f7f5fb;
+    --bg-3: #e7e9f5;
+
+    --text: #1d1d2b;
+    --text-soft: #656579;
+
+    --glass: rgba(255,255,255,0.52);
+    --glass-border: rgba(255,255,255,0.75);
+
+    --accent: #8060bd;
+    --accent-2: #3a9cc5;
+
+    --menu-bg: rgba(247,247,252,0.94);
+
+    --shadow:
+        0 30px 80px rgba(74,64,110,0.17),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 18% 20%,
+            rgba(144, 98, 255, .18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 82% 75%,
+            rgba(48, 185, 230, .12),
+            transparent 35%
+        ),
+        linear-gradient(
+            125deg,
+            var(--bg-1),
+            var(--bg-2),
+            var(--bg-3)
+        );
+
+    transition:
+        background 1s ease,
+        color .5s ease;
+}
+
+
+/* =========================================================
+   АТМОСФЕРНЫЕ СВЕЧЕНИЯ
+========================================================= */
+
+body::before,
+body::after {
+    content: "";
+
+    position: fixed;
+
+    width: 45vw;
+    height: 45vw;
+
+    border-radius: 50%;
+
+    filter: blur(100px);
+
+    opacity: .16;
+
+    pointer-events: none;
+
+    animation:
+        atmosphere 14s ease-in-out infinite alternate;
+
+    z-index: 0;
+}
+
+body::before {
+    background: #9a69ff;
+
+    top: -20vw;
+    left: -15vw;
+}
+
+body::after {
+    background: #46c8ef;
+
+    right: -15vw;
+    bottom: -25vw;
+
+    animation-delay: -7s;
+}
+
+@keyframes atmosphere {
+
+    from {
+        transform:
+            translate3d(0,0,0)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translate3d(60px,40px,0)
+            scale(1.15);
+    }
+
+}
+
+
+/* =========================================================
+   СВЕТЛЯЧКИ
+========================================================= */
+
+.fireflies {
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+.firefly {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.9);
+
+    box-shadow:
+        0 0 5px rgba(255,255,255,.95),
+        0 0 12px rgba(180,210,255,.8),
+        0 0 20px rgba(170,120,255,.5);
+
+    will-change:
+        transform,
+        opacity;
+}
+
+
+/* =========================================================
+   ОСНОВНАЯ СЦЕНА
+========================================================= */
+
+.stage {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 2;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   КАЖДАЯ СТРАНИЦА
+========================================================= */
+
+.page {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    padding:
+        40px
+        7vw;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translate3d(0, 90px, 0)
+        scale(.97);
+
+    filter: blur(10px);
+
+    transition:
+        opacity .75s cubic-bezier(.22,.61,.36,1),
+        transform 1s cubic-bezier(.22,.61,.36,1),
+        filter .9s ease,
+        visibility 0s linear 1s;
+
+    pointer-events: none;
+}
+
+.page.active {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translate3d(0,0,0)
+        scale(1);
+
+    filter: blur(0);
+
+    transition:
+        opacity .85s cubic-bezier(.22,.61,.36,1),
+        transform 1s cubic-bezier(.22,.61,.36,1),
+        filter .85s ease,
+        visibility 0s linear 0s;
+
+    pointer-events: auto;
+}
+
+.page.leaving {
+    opacity: 0;
+
+    transform:
+        translate3d(0,-80px,0)
+        scale(1.02);
+
+    filter: blur(8px);
+}
+
+
+/* =========================================================
+   ПЕРВАЯ СТРАНИЦА
+========================================================= */
+
+.page-one {
+    display: flex;
+}
+
+.profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5vw;
+
+    width: min(1100px, 90vw);
+}
+
+
+/* =========================================================
+   ФОТО
+========================================================= */
+
+.photo-frame {
+    position: relative;
+
+    width: min(31vw, 430px);
+
+    aspect-ratio: 3 / 4;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background: var(--glass);
+
+    border:
+        1px solid
+        var(--glass-border);
+
+    box-shadow: var(--shadow);
+
+    transform:
+        rotate(-1deg);
+
+    transition:
+        transform .6s ease,
+        box-shadow .6s ease;
+}
+
+.photo-frame:hover {
+
+    transform:
+        rotate(0deg)
+        scale(1.015);
+
+    box-shadow:
+        0 35px 100px rgba(0,0,0,.5),
+        0 0 50px rgba(177,133,255,.12);
+}
+
+.photo-frame::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.18),
+            transparent 30%,
+            transparent 65%,
+            rgba(160,220,255,.08)
+        );
+
+    pointer-events: none;
+}
+
+.photo-frame img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   ТЕКСТ ПРОФИЛЯ
+========================================================= */
+
+.profile-info {
+    max-width: 540px;
+}
+
+.eyebrow {
+
+    display: inline-block;
+
+    margin-bottom: 14px;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    color: var(--accent-2);
+}
+
+.profile-name {
+
+    font-size:
+        clamp(38px,5vw,70px);
+
+    line-height: .98;
+
+    letter-spacing: -3px;
+
+    font-weight: 300;
+
+    margin-bottom: 30px;
+}
+
+.profile-name strong {
+
+    display: block;
+
+    font-weight: 600;
+
+    background:
+        linear-gradient(
+            100deg,
+            var(--text),
+            var(--accent),
+            var(--accent-2)
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+/* =========================================================
+   ИНФОРМАЦИОННАЯ КАРТОЧКА
+========================================================= */
+
+.info-card {
+
+    padding:
+        24px
+        28px;
+
+    border-radius: 20px;
+
+    background: var(--glass);
+
+    border:
+        1px solid
+        var(--glass-border);
+
+    box-shadow: var(--shadow);
+
+    backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+}
+
+.info-row {
+
+    display: grid;
+
+    grid-template-columns:
+        130px 1fr;
+
+    gap: 15px;
+
+    padding: 9px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+    font-size: 14px;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: var(--text-soft);
+}
+
+.info-value {
+    color: var(--text);
+}
+
+
+/* =========================================================
+   ВТОРАЯ СТРАНИЦА
+========================================================= */
+
+.page-two {
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.page-title {
+
+    text-align: center;
+
+    margin-bottom: 45px;
+}
+
+.page-title span {
+
+    display: block;
+
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    color: var(--accent-2);
+
+    margin-bottom: 12px;
+}
+
+.page-title h1 {
+
+    font-size:
+        clamp(38px,5vw,65px);
+
+    font-weight: 300;
+
+    letter-spacing: -2px;
+}
+
+
+/* =========================================================
+   КАРТОЧКИ РАЗДЕЛОВ
+========================================================= */
+
+.sections {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(180px,280px)
+        );
+
+    gap: 25px;
+
+    width:
+        min(1000px,90vw);
+}
+
+.section-card {
+
+    position: relative;
+
+    min-height: 250px;
+
+    padding:
+        32px
+        28px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.11),
+            rgba(255,255,255,.035)
+        );
+
+    border:
+        1px solid
+        var(--glass-border);
+
+    box-shadow: var(--shadow);
+
+    backdrop-filter: blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+    transition:
+        transform .5s cubic-bezier(.2,.8,.2,1),
+        border-color .5s ease,
+        box-shadow .5s ease;
+}
+
+.section-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 160px;
+    height: 160px;
+
+    top: -60px;
+    right: -60px;
+
+    border-radius: 50%;
+
+    background:
+        var(--card-color);
+
+    filter: blur(50px);
+
+    opacity: .25;
+
+    transition: .5s ease;
+}
+
+.section-card:hover {
+
+    transform:
+        translateY(-12px);
+
+    border-color:
+        rgba(255,255,255,.3);
+
+    box-shadow:
+        0 35px 80px rgba(0,0,0,.3),
+        0 0 35px var(--card-color);
+}
+
+.section-card:hover::before {
+
+    transform:
+        scale(1.5);
+
+    opacity: .4;
+}
+
+
+/* =========================================================
+   ЛИНЕЙНЫЕ ИКОНКИ
+========================================================= */
+
+.card-icon {
+
+    position: absolute;
+
+    top: 28px;
+    left: 28px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid
+        rgba(255,255,255,.11);
+}
+
+.card-icon svg {
+
+    width: 23px;
+    height: 23px;
+
+    fill: none;
+
+    stroke:
+        var(--text);
+
+    stroke-width: 1.7;
+
+    stroke-linecap:
+        round;
+
+    stroke-linejoin:
+        round;
+
+    opacity: .88;
+}
+
+.section-card h2 {
+
+    font-size: 22px;
+
+    font-weight: 500;
+
+    margin-bottom: 9px;
+}
+
+.section-card p {
+
+    font-size: 13px;
+
+    color: var(--text-soft);
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   МЕНЮ
+========================================================= */
+
+.menu-button {
+
+    position: fixed;
+
+    top: 25px;
+    right: 28px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    border-radius: 15px;
+
+    border:
+        1px solid
+        var(--glass-border);
+
+    background:
+        var(--glass);
+
+    backdrop-filter:
+        blur(15px);
+
+    -webkit-backdrop-filter:
+        blur(15px);
+
+    cursor: pointer;
+
+    z-index: 100;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.18);
+
+    transition: .35s ease;
+}
+
+.menu-button:hover {
+
+    transform:
+        scale(1.06);
+}
+
+.menu-button span {
+
+    width: 20px;
+    height: 2px;
+
+    border-radius: 5px;
+
+    background:
+        var(--text);
+
+    transition: .3s ease;
+}
+
+
+/* =========================================================
+   ЗАТЕМНЕНИЕ
+========================================================= */
+
+.menu-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.25);
+
+    backdrop-filter:
+        blur(5px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: .4s ease;
+
+    z-index: 90;
+}
+
+.menu-overlay.open {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+/* =========================================================
+   БОКОВОЕ МЕНЮ
+========================================================= */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 0;
+    right: 0;
+
+    width:
+        min(350px,88vw);
+
+    height: 100vh;
+
+    padding:
+        35px 22px;
+
+    background:
+        var(--menu-bg);
+
+    border-left:
+        1px solid
+        var(--glass-border);
+
+    backdrop-filter:
+        blur(30px);
+
+    -webkit-backdrop-filter:
+        blur(30px);
+
+    transform:
+        translateX(105%);
+
+    transition:
+        transform .55s
+        cubic-bezier(.77,0,.18,1);
+
+    z-index: 95;
+
+    box-shadow:
+        -30px 0 80px
+        rgba(0,0,0,.25);
+}
+
+.side-menu.open {
+
+    transform:
+        translateX(0);
+}
+
+
+/* =========================================================
+   ПРОФИЛЬ В МЕНЮ
+========================================================= */
+
+.menu-profile {
+
+    text-align: center;
+
+    padding:
+        15px 0 30px;
+
+    border-bottom:
+        1px solid
+        var(--glass-border);
+}
+
+.avatar {
+
+    width: 88px;
+    height: 88px;
+
+    margin:
+        0 auto 15px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    border:
+        2px solid
+        rgba(255,255,255,.25);
+
+    box-shadow:
+        0 0 30px
+        rgba(165,120,255,.22);
+}
+
+.avatar img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.menu-name {
+
+    font-size: 20px;
+
+    font-weight: 500;
+}
+
+.menu-subtitle {
+
+    font-size: 12px;
+
+    color: var(--text-soft);
+
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   ПУНКТЫ МЕНЮ
+========================================================= */
+
+.menu-links {
+
+    padding-top: 20px;
+}
+
+.menu-link {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding:
+        14px 15px;
+
+    margin-bottom: 6px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: transparent;
+
+    color: var(--text);
+
+    text-align: left;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition: .3s ease;
+}
+
+.menu-link:hover {
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+.menu-link .icon {
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,.07);
+}
+
+.menu-link .icon svg {
+
+    width: 17px;
+    height: 17px;
+
+    fill: none;
+
+    stroke:
+        var(--text);
+
+    stroke-width: 1.7;
+
+    stroke-linecap:
+        round;
+
+    stroke-linejoin:
+        round;
+}
+
+.menu-divider {
+
+    height: 1px;
+
+    background:
+        var(--glass-border);
+
+    margin:
+        18px 10px;
+}
+
+
+/* =========================================================
+   ТЕМА
+========================================================= */
+
+.theme-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        12px 15px;
+}
+
+.theme-name {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    font-size: 15px;
+}
+
+.theme-icon {
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background:
+        rgba(255,255,255,.07);
+}
+
+.switch {
+
+    position: relative;
+
+    width: 48px;
+    height: 27px;
+
+    cursor: pointer;
+}
+
+.switch input {
+
+    display: none;
+}
+
+.slider {
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    border:
+        1px solid
+        var(--glass-border);
+
+    transition: .35s ease;
+}
+
+.slider::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 19px;
+    height: 19px;
+
+    left: 3px;
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 2px 7px
+        rgba(0,0,0,.25);
+
+    transition: .35s ease;
+}
+
+.switch input:checked + .slider {
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--accent),
+            var(--accent-2)
+        );
+}
+
+.switch input:checked
++ .slider::before {
+
+    transform:
+        translateX(21px);
+}
+
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .page {
+        padding:
+            30px 22px;
+    }
+
+    .profile {
+
+        flex-direction: column;
+
+        gap: 30px;
+
+        text-align: center;
+    }
+
+    .photo-frame {
+
+        width:
+            min(48vw,280px);
+    }
+
+    .profile-name {
+
+        font-size: 42px;
+
+        letter-spacing: -2px;
+    }
+
+    .info-card {
+
+        text-align: left;
+    }
+
+    .sections {
+
+        grid-template-columns:
+            1fr;
+
+        width:
+            min(420px,88vw);
+    }
+
+    .section-card {
+
+        min-height: 150px;
+    }
+
+    .page-title {
+
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .photo-frame {
+
+        width: 58vw;
+    }
+
+    .info-row {
+
+        grid-template-columns:
+            105px 1fr;
+
+        font-size: 12px;
+    }
+
+    .profile-name {
+
+        margin-bottom: 18px;
+    }
+}
+
+
+/* =========================================================
+   УМЕНЬШЕНИЕ АНИМАЦИИ ЕСЛИ ПОЛЬЗОВАТЕЛЬ ПРОСИТ
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     СВЕТЛЯЧКИ
+====================================================== -->
+
+<div
+    class="fireflies"
+    id="fireflies">
+</div>
+
+
+<!-- =====================================================
+     КНОПКА МЕНЮ
+====================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton"
+    aria-label="Открыть меню">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+</button>
+
+
+<!-- =====================================================
+     ЗАТЕМНЕНИЕ
+====================================================== -->
+
+<div
+    class="menu-overlay"
+    id="menuOverlay">
+</div>
+
+
+<!-- =====================================================
+     БОКОВОЕ МЕНЮ
+====================================================== -->
+
+<aside
+    class="side-menu"
+    id="sideMenu">
+
+
+    <div class="menu-profile">
+
+        <div class="avatar">
+
+            <img
+                src="foto.jpg"
+                alt="Лола Давлатова">
+
+        </div>
+
+        <div class="menu-name">
+            Лола Давлатова
+        </div>
+
+        <div class="menu-subtitle">
+            Портфолио
+        </div>
+
+    </div>
+
+
+    <div class="menu-links">
+
+
+        <!-- ОПЫТ -->
+
+        <button
+            class="menu-link"
+            onclick="openPortfolioSection('experience')">
+
+            <span class="icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <rect
+                        x="3"
+                        y="7"
+                        width="18"
+                        height="13"
+                        rx="2">
+                    </rect>
+
+                    <path
+                        d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                    </path>
+
+                    <path
+                        d="M3 12h18">
+                    </path>
+
+                </svg>
+
+            </span>
+
+            <span>
+                Опыт работы
+            </span>
+
+        </button>
+
+
+        <!-- ВОЛОНТЕРСТВО -->
+
+        <button
+            class="menu-link"
+            onclick="openPortfolioSection('volunteering')">
+
+            <span class="icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M20.8 8.8
+                           c0 5.2-8.8 10.2-8.8 10.2
+                           S3.2 14 3.2 8.8
+                           A4.7 4.7 0 0 1 12 6
+                           a4.7 4.7 0 0 1 8.8 2.8Z">
+                    </path>
+
+                </svg>
+
+            </span>
+
+            <span>
+                Волонтерство
+            </span>
+
+        </button>
+
+
+        <!-- ТВОРЧЕСТВО -->
+
+        <button
+            class="menu-link"
+            onclick="openPortfolioSection('creativity')">
+
+            <span class="icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z">
+                    </path>
+
+                    <path
+                        d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z">
+                    </path>
+
+                </svg>
+
+            </span>
+
+            <span>
+                Творчество
+            </span>
+
+        </button>
+
+
+        <div class="menu-divider"></div>
+
+
+        <!-- ТЕМА -->
+
+        <div class="theme-row">
+
+            <div class="theme-name">
+
+                <span
+                    class="theme-icon"
+                    id="themeIcon">
+                    ☾
+                </span>
+
+                <span id="themeText">
+                    Темная тема
+                </span>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="themeToggle">
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     ОСНОВНАЯ СЦЕНА
+====================================================== -->
+
+<main class="stage">
+
+
+    <!-- =================================================
+         СТРАНИЦА 1
+    ================================================== -->
+
+    <section
+        class="page page-one active"
+        id="pageHome">
+
+
+        <div class="profile">
+
+
+            <!-- ФОТО -->
+
+            <div class="photo-frame">
+
+                <img
+                    src="foto.jpg"
+                    alt="Лола Давлатова">
+
+            </div>
+
+
+            <!-- ИНФОРМАЦИЯ -->
+
+            <div class="profile-info">
+
+                <span class="eyebrow">
+                    Personal Portfolio
+                </span>
+
+                <h1 class="profile-name">
+
+                    <span>
+                        Лола
+                    </span>
+
+                    <strong>
+                        Давлатова
+                    </strong>
+
+                </h1>
+
+
+                <div class="info-card">
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Имя
+                        </span>
+
+                        <span class="info-value">
+                            Лола Давлатова
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Возраст
+                        </span>
+
+                        <span class="info-value">
+                            27 лет
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Пол
+                        </span>
+
+                        <span class="info-value">
+                            Женский
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Гражданство
+                        </span>
+
+                        <span class="info-value">
+                            Узбекистан
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Контакты
+                        </span>
+
+                        <span class="info-value">
+                            lola.davlatova99@gmail.com
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Telegram
+                        </span>
+
+                        <span class="info-value">
+                            @Lulu_Felis
+                        </span>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <span class="info-label">
+                            Образование
+                        </span>
+
+                        <span class="info-value">
+                            Высшее, НУУз
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         СТРАНИЦА 2
+    ================================================== -->
+
+    <section
+        class="page page-two"
+        id="pageSections">
+
+
+        <div class="page-title">
+
+            <span>
+                Portfolio
+            </span>
+
+            <h1>
+                Мои направления
+            </h1>
+
+        </div>
+
+
+        <div class="sections">
+
+
+            <!-- ОПЫТ -->
+
+            <div
+                class="section-card"
+                style="--card-color:#a879ff"
+                onclick="
+                    openPortfolioSection('experience')
+                ">
+
+                <div class="card-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <rect
+                            x="3"
+                            y="7"
+                            width="18"
+                            height="13"
+                            rx="2">
+                        </rect>
+
+                        <path
+                            d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                        </path>
+
+                        <path
+                            d="M3 12h18">
+                        </path>
+
+                    </svg>
+
+                </div>
+
+
+                <h2>
+                    Опыт работы
+                </h2>
+
+                <p>
+                    Профессиональный путь,
+                    проекты и достижения.
+                </p>
+
+            </div>
+
+
+            <!-- ВОЛОНТЕРСТВО -->
+
+            <div
+                class="section-card"
+                style="--card-color:#55d5ba"
+                onclick="
+                    openPortfolioSection('volunteering')
+                ">
+
+                <div class="card-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path
+                            d="M20.8 8.8
+                               c0 5.2-8.8 10.2-8.8 10.2
+                               S3.2 14 3.2 8.8
+                               A4.7 4.7 0 0 1 12 6
+                               a4.7 4.7 0 0 1 8.8 2.8Z">
+                        </path>
+
+                    </svg>
+
+                </div>
+
+
+                <h2>
+                    Волонтерство
+                </h2>
+
+                <p>
+                    Общественная деятельность,
+                    инициативы и проекты.
+                </p>
+
+            </div>
+
+
+            <!-- ТВОРЧЕСТВО -->
+
+            <div
+                class="section-card"
+                style="--card-color:#ff9bc9"
+                onclick="
+                    openPortfolioSection('creativity')
+                ">
+
+                <div class="card-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <path
+                            d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z">
+                        </path>
+
+                        <path
+                            d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z">
+                        </path>
+
+                    </svg>
+
+                </div>
+
+
+                <h2>
+                    Творчество
+                </h2>
+
+                <p>
+                    Идеи, интересы, проекты
+                    и творческие работы.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ
+========================================================= */
+
+const pageHome =
+    document.getElementById("pageHome");
+
+const pageSections =
+    document.getElementById("pageSections");
+
+let currentPage = 0;
+
+let isTransitioning = false;
+
+
+/*
+    duration чуть больше CSS-анимации,
+    чтобы пользователь не мог случайно
+    пролистать сразу несколько страниц.
+*/
+
+const transitionDuration = 1050;
+
+
+function goToPage(target) {
+
+    if (target === currentPage) {
+        return;
+    }
+
+    if (target < 0 || target > 1) {
+        return;
+    }
+
+    if (isTransitioning) {
+        return;
+    }
+
+    isTransitioning = true;
+
+
+    const current =
+        currentPage === 0
+            ? pageHome
+            : pageSections;
+
+    const next =
+        target === 0
+            ? pageHome
+            : pageSections;
+
+
+    current.classList.add("leaving");
+
+    next.classList.add("active");
+
+
+    setTimeout(() => {
+
+        current.classList.remove("active");
+        current.classList.remove("leaving");
+
+        currentPage = target;
+
+    }, 800);
+
+
+    setTimeout(() => {
+
+        isTransitioning = false;
+
+    }, transitionDuration);
+
+}
+
+
+/* =========================================================
+   КОЛЕСО МЫШИ
+========================================================= */
+
+let wheelAccumulator = 0;
+
+let wheelTimer = null;
+
+document.addEventListener(
+    "wheel",
+    function(event) {
+
+        if (isTransitioning) {
+            return;
+        }
+
+        /*
+            Накопление движения делает прокрутку
+            более естественной и не реагирующей
+            на случайный микроскролл.
+        */
+
+        wheelAccumulator += event.deltaY;
+
+
+        clearTimeout(wheelTimer);
+
+        wheelTimer = setTimeout(() => {
+
+            wheelAccumulator = 0;
+
+        }, 180);
+
+
+        if (wheelAccumulator > 70) {
+
+            wheelAccumulator = 0;
+
+            if (currentPage === 0) {
+                goToPage(1);
+            }
+
+        }
+
+
+        if (wheelAccumulator < -70) {
+
+            wheelAccumulator = 0;
+
+            if (currentPage === 1) {
+                goToPage(0);
+            }
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* =========================================================
+   TOUCH / СВАЙП
+========================================================= */
+
+let touchStartY = 0;
+
+let touchStartTime = 0;
+
+
+document.addEventListener(
+    "touchstart",
+    function(event) {
+
+        touchStartY =
+            event.changedTouches[0].clientY;
+
+        touchStartTime =
+            Date.now();
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+document.addEventListener(
+    "touchend",
+    function(event) {
+
+        const touchEndY =
+            event.changedTouches[0].clientY;
+
+        const delta =
+            touchStartY - touchEndY;
+
+        const duration =
+            Date.now() - touchStartTime;
+
+
+        if (
+            Math.abs(delta) < 55 ||
+            duration > 800
+        ) {
+            return;
+        }
+
+
+        if (delta > 0 && currentPage === 0) {
+            goToPage(1);
+        }
+
+        if (delta < 0 && currentPage === 1) {
+            goToPage(0);
+        }
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* =========================================================
+   КЛАВИАТУРА
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "ArrowDown" ||
+            event.key === "PageDown"
+        ) {
+
+            if (currentPage === 0) {
+                goToPage(1);
+            }
+
+        }
+
+
+        if (
+            event.key === "ArrowUp" ||
+            event.key === "PageUp"
+        ) {
+
+            if (currentPage === 1) {
+                goToPage(0);
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   МЕНЮ
+========================================================= */
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const sideMenu =
+    document.getElementById("sideMenu");
+
+const menuOverlay =
+    document.getElementById("menuOverlay");
+
+
+menuButton.addEventListener(
+    "click",
+    function() {
+
+        sideMenu.classList.toggle("open");
+
+        menuOverlay.classList.toggle("open");
+
+    }
+);
+
+
+menuOverlay.addEventListener(
+    "click",
+    closeMenu
+);
+
+
+function closeMenu() {
+
+    sideMenu.classList.remove("open");
+
+    menuOverlay.classList.remove("open");
+
+}
+
+
+/* =========================================================
+   ТЕМА
+========================================================= */
+
+const themeToggle =
+    document.getElementById("themeToggle");
+
+const themeText =
+    document.getElementById("themeText");
+
+const themeIcon =
+    document.getElementById("themeIcon");
+
+
+function setTheme(theme) {
+
+    if (theme === "light") {
+
+        document.body.classList.add("light");
+
+        themeToggle.checked = true;
+
+        themeText.textContent =
+            "Светлая тема";
+
+        themeIcon.textContent =
+            "☀";
+
+    } else {
+
+        document.body.classList.remove("light");
+
+        themeToggle.checked = false;
+
+        themeText.textContent =
+            "Темная тема";
+
+        themeIcon.textContent =
+            "☾";
+
+    }
+
+}
+
+
+themeToggle.addEventListener(
+    "change",
+    function() {
+
+        const theme =
+            themeToggle.checked
+                ? "light"
+                : "dark";
+
+        localStorage.setItem(
+            "theme",
+            theme
+        );
+
+        setTheme(theme);
+
+    }
+);
+
+
+const savedTheme =
+    localStorage.getItem("theme");
+
+if (savedTheme) {
+    setTheme(savedTheme);
+}
+
+
+/* =========================================================
+   СВЕТЛЯЧКИ
+   ---------------------------------------------------------
+   Здесь вместо CSS animation используется физическая
+   модель движения.
+
+   У каждого светлячка есть:
+   x/y
+   скорость
+   направление
+   собственная частота
+   фаза
+   сила реакции на мышь
+
+   Поэтому движение получается немного хаотичным,
+   но не выглядит случайным телепортированием.
+========================================================= */
+
+const fireflyContainer =
+    document.getElementById("fireflies");
+
+const fireflies = [];
+
+const fireflyCount = 42;
+
+const mouse = {
+
+    x: -1000,
+    y: -1000,
+
+    active: false
+
+};
+
+
+for (
+    let i = 0;
+    i < fireflyCount;
+    i++
+) {
+
+    const element =
+        document.createElement("span");
+
+    element.className =
+        "firefly";
+
+
+    const angle =
+        Math.random() * Math.PI * 2;
+
+    const speed =
+        0.003 + Math.random() * 0.012;
+
+
+    const particle = {
+
+        element,
+
+        x:
+            Math.random()
+            * window.innerWidth,
+
+        y:
+            Math.random()
+            * window.innerHeight,
+
+        vx:
+            Math.cos(angle)
+            * speed,
+
+        vy:
+            Math.sin(angle)
+            * speed,
+
+        baseSpeed:
+            speed,
+
+        size:
+            1.5 + Math.random() * 2.5,
+
+        phase:
+            Math.random()
+            * Math.PI
+            * 2,
+
+        frequency:
+            0.0005
+            + Math.random()
+            * 0.001,
+
+        drift:
+            .012
+            + Math.random() * .035,
+
+        opacity:
+            .25
+            + Math.random() * .65,
+
+        lastX: 0,
+        lastY: 0
+
+    };
+
+
+    element.style.width =
+        particle.size + "px";
+
+    element.style.height =
+        particle.size + "px";
+
+    element.style.opacity =
+        particle.opacity;
+
+
+    fireflyContainer.appendChild(
+        element
+    );
+
+    fireflies.push(particle);
+
+}
+
+
+/* =========================================================
+   МЫШЬ
+========================================================= */
+
+window.addEventListener(
+    "mousemove",
+    function(event) {
+
+        mouse.x = event.clientX;
+
+        mouse.y = event.clientY;
+
+        mouse.active = true;
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+window.addEventListener(
+    "mouseleave",
+    function() {
+
+        mouse.active = false;
+
+    }
+);
+
+
+/* =========================================================
+   ФИЗИКА СВЕТЛЯЧКОВ
+========================================================= */
+
+let previousTime =
+    performance.now();
+
+
+function animateFireflies(time) {
+
+    const delta =
+        Math.min(
+            time - previousTime,
+            32
+        );
+
+    previousTime = time;
+
+
+    fireflies.forEach(
+        particle => {
+
+
+            /* ---------------------------------------------
+               ПЛАВНЫЙ ПРИРОДНЫЙ ДРЕЙФ
+            --------------------------------------------- */
+
+            const waveX =
+                Math.sin(
+                    time
+                    * particle.frequency
+                    + particle.phase
+                )
+                * particle.drift;
+
+            const waveY =
+                Math.cos(
+                    time
+                    * particle.frequency
+                    * 1.37
+                    + particle.phase
+                )
+                * particle.drift;
+
+
+            particle.vx +=
+                waveX
+                * 0.003
+                * delta;
+
+            particle.vy +=
+                waveY
+                * 0.003
+                * delta;
+
+
+            /* ---------------------------------------------
+               ЛЕГКОЕ ВОЗВРАЩЕНИЕ К ОСНОВНОЙ СКОРОСТИ
+            --------------------------------------------- */
+
+            const velocity =
+                Math.sqrt(
+                    particle.vx ** 2
+                    +
+                    particle.vy ** 2
+                );
+
+
+            const desired =
+                particle.baseSpeed;
+
+
+            if (velocity > 0) {
+
+                particle.vx +=
+                    (
+                        particle.vx
+                        / velocity
+                        * desired
+                        -
+                        particle.vx
+                    )
+                    * 0.004
+                    * delta;
+
+                particle.vy +=
+                    (
+                        particle.vy
+                        / velocity
+                        * desired
+                        -
+                        particle.vy
+                    )
+                    * 0.004
+                    * delta;
+
+            }
+
+
+            /* ---------------------------------------------
+               РЕАКЦИЯ НА МЫШЬ
+               Не резкое отталкивание,
+               а мягкий поток воздуха.
+            --------------------------------------------- */
+
+            if (mouse.active) {
+
+                const dx =
+                    particle.x - mouse.x;
+
+                const dy =
+                    particle.y - mouse.y;
+
+                const distance =
+                    Math.sqrt(
+                        dx * dx
+                        +
+                        dy * dy
+                    );
+
+                const influenceRadius =
+                    150;
+
+
+                if (
+                    distance > 0
+                    &&
+                    distance < influenceRadius
+                ) {
+
+                    const strength =
+                        (
+                            1
+                            -
+                            distance
+                            / influenceRadius
+                        ) ** 2;
+
+
+                    const nx =
+                        dx / distance;
+
+                    const ny =
+                        dy / distance;
+
+
+                    /*
+                        Основной толчок от мыши
+                    */
+
+                    particle.vx +=
+                        nx
+                        * strength
+                        * 0.008;
+
+                    particle.vy +=
+                        ny
+                        * strength
+                        * 0.008;
+
+
+                    /*
+                        Небольшой боковой поток,
+                        благодаря которому частицы
+                        не просто разлетаются радиально.
+                    */
+
+                    particle.vx +=
+                        -ny
+                        * strength
+                        * 0.0012;
+
+                    particle.vy +=
+                        nx
+                        * strength
+                        * 0.0012;
+
+                }
+
+            }
+
+
+            /* ---------------------------------------------
+               ДВИЖЕНИЕ
+            --------------------------------------------- */
+
+            particle.x +=
+                particle.vx * delta;
+
+            particle.y +=
+                particle.vy * delta;
+
+
+            /* ---------------------------------------------
+               МЯГКИЕ ГРАНИЦЫ
+            --------------------------------------------- */
+
+            const margin = 30;
+
+
+            if (
+                particle.x < -margin
+            ) {
+
+                particle.x =
+                    window.innerWidth
+                    + margin;
+
+            }
+
+
+            if (
+                particle.x >
+                window.innerWidth
+                + margin
+            ) {
+
+                particle.x = -margin;
+
+            }
+
+
+            if (
+                particle.y < -margin
+            ) {
+
+                particle.y =
+                    window.innerHeight
+                    + margin;
+
+            }
+
+
+            if (
+                particle.y >
+                window.innerHeight
+                + margin
+            ) {
+
+                particle.y = -margin;
+
+            }
+
+
+            /* ---------------------------------------------
+               МЕРЦАНИЕ
+            --------------------------------------------- */
+
+            const glow =
+                .5
+                +
+                Math.sin(
+                    time * .002
+                    + particle.phase
+                )
+                * .5;
+
+
+            const opacity =
+                particle.opacity
+                *
+                (
+                    .65
+                    +
+                    glow * .35
+                );
+
+
+            /* ---------------------------------------------
+               РЕНДЕР
+            --------------------------------------------- */
+
+            particle.element.style.transform =
+                `translate3d(
+                    ${particle.x}px,
+                    ${particle.y}px,
+                    0
+                )`;
+
+            particle.element.style.opacity =
+                opacity;
+
+        }
+    );
+
+
+    requestAnimationFrame(
+        animateFireflies
+    );
+
+}
+
+
+requestAnimationFrame(
+    animateFireflies
+);
+
+
+/* =========================================================
+   АДАПТАЦИЯ ПРИ ИЗМЕНЕНИИ РАЗМЕРА
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    function() {
+
+        fireflies.forEach(
+            particle => {
+
+                if (
+                    particle.x
+                    >
+                    window.innerWidth
+                ) {
+
+                    particle.x =
+                        Math.random()
+                        * window.innerWidth;
+
+                }
+
+                if (
+                    particle.y
+                    >
+                    window.innerHeight
+                ) {
+
+                    particle.y =
+                        Math.random()
+                        * window.innerHeight;
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   РАЗДЕЛЫ
+========================================================= */
+
+function openPortfolioSection(section) {
+
+    /*
+        Сейчас это место подготовлено
+        для следующих страниц.
+
+        Например, позже:
+
+        experience
+        volunteering
+        creativity
+
+        можно будет сделать отдельными
+        полноценными экранами с тем же
+        механизмом перелистывания.
+    */
+
+    console.log(
+        "Выбран раздел:",
+        section
+    );
+
+    closeMenu();
+
+}
+
+
+/* =========================================================
+   ОТКРЫТИЕ КАРТОЧЕК ВТОРОЙ СТРАНИЦЫ
+========================================================= */
+
+document
+    .querySelectorAll(".section-card")
+    .forEach(card => {
+
+        card.addEventListener(
+            "mouseenter",
+            () => {
+
+                card.style.transform =
+                    "translateY(-12px)";
+
+            }
+        );
+
+    });
+
+</script>
+
+</body>
+</html>
